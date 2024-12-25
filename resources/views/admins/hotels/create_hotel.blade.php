@@ -91,6 +91,9 @@
 @endsection
 
 @section('script')
+    <script>
+        const apiKey = "{{ config('api.apiKey') }}";
+    </script>
     <script src="{{ asset('js/address.js') }}"></script>
     <script>
         function validateFormAddHotel() {

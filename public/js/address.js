@@ -1,4 +1,3 @@
-const apiKey = '25efb5ed-c085-11ef-a349-824cd7dd2091';
 const apiProvinces = "https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/province";
 const apiDistricts = "https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/district";
 const apiWard = "https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward?district_id";

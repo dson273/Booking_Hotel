@@ -8,7 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.0.0/tinymce.min.js"></script>
     <script>
         tinymce.init({
-            selector: '.tinymce' ,
+            selector: '.tinymce',
             plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
         });
     </script>
@@ -19,12 +19,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         label {
-            font-weight: 600 ;
+            font-weight: 600;
         }
 
         .form-group span {
-            color : red ;
-            margin-left: 10px ;
+            color: red;
+            margin-left: 10px;
         }
     </style>
 @endsection
@@ -34,9 +34,9 @@
 
     <div class="height-100">
         <h2 class="mt-3">{{ $title }}</h2>
-        <form action="{{ route('hotels.update' , $hotelId->id) }}" method="post" onsubmit="return validateFormUpdateHotel();">
+        <form action="{{ route('hotels.update', $hotelId->id) }}" method="post" onsubmit="return validateFormUpdateHotel();">
             @csrf
-            @method("PUT")
+            @method('PUT')
             <div class="row mb-4">
                 <div class="col-6">
                     <div class="form-group mt-3">
@@ -64,8 +64,8 @@
                     <div class="form-group mt-3">
                         <label for="">Trạng thái</label>
                         <select name="status" class="form-select mt-2">
-                            <option {{ $hotelId->status == 1 ? "selected" : "" }} value="1">Hoạt động</option>
-                            <option {{ $hotelId->status == 2 ? "selected" : "" }} value="2">Tạm ẩn</option>
+                            <option {{ $hotelId->status == 1 ? 'selected' : '' }} value="1">Hoạt động</option>
+                            <option {{ $hotelId->status == 2 ? 'selected' : '' }} value="2">Tạm ẩn</option>
                         </select>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                         <label for="">Địa điểm hiện tại</label>
                         <input type="text" value="{{ $hotelId->address }}" id="hidden_address" readonly name="address" class="form-control mt-2">
                     </div>
-                    
+
                 </div>
             </div>
             <div>
@@ -101,39 +101,43 @@
 @endsection
 
 @section('script')
+    <script>
+        const apiKey = "{{ config('api.apiKey') }}";
+    </script>
+
     <script src="{{ asset('js/address.js') }}"></script>
     <script>
         function validateFormUpdateHotel() {
-            const province = document.getElementById('provinceSelect') ;
-            const province_err = document.getElementById('province_err') ;
-            const district = document.getElementById('districtSelect') ;
-            const district_err = document.getElementById('district_err') ;
-            const ward = document.getElementById('wardSelect') ;
-            const ward_err = document.getElementById('ward_err') ;
-            const address = document.getElementById('address') ;
-            const address_err = document.getElementById('address_err') ;
-            const name_hotel = document.getElementById('name_hotel') ;
-            const name_hotel_err = document.getElementById('name_hotel_err') ;
-            const email = document.getElementById('email') ;
-            const email_err = document.getElementById('email_err') ;
-            const phone = document.getElementById('phone') ;
-            const phone_err = document.getElementById('phone_err') ;
+            const province = document.getElementById('provinceSelect');
+            const province_err = document.getElementById('province_err');
+            const district = document.getElementById('districtSelect');
+            const district_err = document.getElementById('district_err');
+            const ward = document.getElementById('wardSelect');
+            const ward_err = document.getElementById('ward_err');
+            const address = document.getElementById('address');
+            const address_err = document.getElementById('address_err');
+            const name_hotel = document.getElementById('name_hotel');
+            const name_hotel_err = document.getElementById('name_hotel_err');
+            const email = document.getElementById('email');
+            const email_err = document.getElementById('email_err');
+            const phone = document.getElementById('phone');
+            const phone_err = document.getElementById('phone_err');
 
-            let check = true ;
+            let check = true;
 
-            if(province.value.trim() != "") {
-                if(district.value.trim() == "") {
-                    district_err.textContent = "Vui lòng chọn quận/huyện" ;
-                    check = false ;
-                }else {
-                    district_err.textContent = "" ;
+            if (province.value.trim() != "") {
+                if (district.value.trim() == "") {
+                    district_err.textContent = "Vui lòng chọn quận/huyện";
+                    check = false;
+                } else {
+                    district_err.textContent = "";
                 }
 
-                if(ward.value.trim() == "") {
-                    ward_err.textContent = "Vui lòng chọn phường/xã" ;
-                    check = false ;
-                }else {
-                    ward_err.textContent = "" ;
+                if (ward.value.trim() == "") {
+                    ward_err.textContent = "Vui lòng chọn phường/xã";
+                    check = false;
+                } else {
+                    ward_err.textContent = "";
                 }
 
                 if (address.value.trim() === "") {
@@ -179,17 +183,17 @@
                 phone_err.textContent = "";
             }
 
-            return check ;
+            return check;
         }
 
-        document.getElementById('btn-update-hotel').addEventListener('click' , () => {
+        document.getElementById('btn-update-hotel').addEventListener('click', () => {
             const province = provinceSelect.options[provinceSelect.selectedIndex].text;
             const district = districtSelect.options[districtSelect.selectedIndex].text;
             const ward = wardSelect.options[wardSelect.selectedIndex].text;
-            const address = document.getElementById('address').value ;
-            const hidden_address = document.getElementById('hidden_address') ;
-            if(document.getElementById('provinceSelect').value != "") {
-                hidden_address.value = address + ', ' + ward + ', ' + district + ', ' + province ;
+            const address = document.getElementById('address').value;
+            const hidden_address = document.getElementById('hidden_address');
+            if (document.getElementById('provinceSelect').value != "") {
+                hidden_address.value = address + ', ' + ward + ', ' + district + ', ' + province;
             }
         })
     </script>

@@ -16,11 +16,11 @@ class PaymentController extends Controller
 
         $reservation = Reservation::where('id' , $reservation_id)->first() ;
 
-        $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+        $vnp_Url = config('api.vnp_Url');
         $vnp_Returnurl = "http://127.0.0.1:8000/history-booking";
 
-        $vnp_TmnCode = "FTTP8JU0";//Mã website tại VNPAY
-        $vnp_HashSecret = "4X08L0XGY8N1SAS9PQ44RHBIFXXY55P8"; //Chuỗi bí mật
+        $vnp_TmnCode = config('api.vnp_TmnCode');//Mã website tại VNPAY
+        $vnp_HashSecret = config('api.vnp_HashSecret'); //Chuỗi bí mật
 
         $vnp_TxnRef = rand(100000000 , 999999999); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $vnp_OrderInfo = "Thanh toán đơn đặt phòng";
