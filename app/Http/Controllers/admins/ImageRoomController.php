@@ -9,80 +9,85 @@ use Illuminate\Support\Str;
 
 class ImageRoomController extends Controller
 {
-    protected $image_rooms ;
+    protected $image_rooms;
 
-    public function __construct() {
-        $this->image_rooms = new ImageRoom() ;
+    public function __construct()
+    {
+        $this->image_rooms = new ImageRoom();
     }
 
     // Tất cả các phương thức trong controller này giống với ImageRoomController ;
+    public function countImageRooms()
+    {
 
-    public function countImageRooms() {
+        $title = "Quản lí ảnh phòng";
 
-        $title = "Quản lí ảnh phòng" ;
+        $countImageRooms = $this->image_rooms->countImageRooms();
 
-        $countImageRooms = $this->image_rooms->countImageRooms() ;
-
-        return view('admins.images_room.manager_image_all_room' , compact('title' , 'countImageRooms')) ;
+        return view('admins.images_room.manager_image_all_room', compact('title', 'countImageRooms'));
     }
 
-    public function listImagesRoom(Request $request) {
+    public function listImagesRoom(Request $request)
+    {
 
-        $room_id = $request->room_id ;
+        $room_id = $request->room_id;
 
-        $title = "Danh sách ảnh" ;
+        $title = "Danh sách ảnh";
 
-        $listImages = $this->image_rooms->listImagesRoom($room_id) ;
+        $listImages = $this->image_rooms->listImagesRoom($room_id);
 
-        return view('admins.images_room.manager_image_room' , compact('title' , 'listImages' , 'room_id')) ;
+        return view('admins.images_room.manager_image_room', compact('title', 'listImages', 'room_id'));
     }
 
-    public function createImageRoom(Request $request) {
+    public function createImageRoom(Request $request)
+    {
 
-        $title = "Thêm ảnh phòng" ;
+        $title = "Thêm ảnh phòng";
 
-        $room_id = $request->room_id ;
+        $room_id = $request->room_id;
 
-        return view('admins.images_room.create_image_room' , compact('title' , 'room_id')) ;
+        return view('admins.images_room.create_image_room', compact('title', 'room_id'));
     }
 
-    public function storeImageRoom(Request $request) {
+    public function storeImageRoom(Request $request)
+    {
 
-        $data['room_id'] = $request->room_id ;
+        $data['room_id'] = $request->room_id;
 
-        if($request->hasFile('image_room')) {
-            
-            foreach($request->file('image_room') as $image) {
+        if ($request->hasFile('image_room')) {
 
-                $extension = $image->extension() ;
+            foreach ($request->file('image_room') as $image) {
 
-                $uuid = Str::uuid()->toString() ;
+                $extension = $image->extension();
 
-                $file_name = $uuid . '-room.'. $extension ;
+                $uuid = Str::uuid()->toString();
 
-                $image->move(public_path('images_room') , $file_name) ;
+                $file_name = $uuid . '-room.' . $extension;
 
-                $data['image_room'] = 'images_room/' . $file_name ;
+                $image->move(public_path('images_room'), $file_name);
+
+                $data['image_room'] = 'images_room/' . $file_name;
 
                 ImageRoom::query()->create($data);
             }
         }
 
-        return redirect()->route('manager-images-room' , ['room_id' => $request->room_id]) ;
+        return redirect()->route('manager-images-room', ['room_id' => $request->room_id]);
     }
 
-    public function deleteImage(Request $request) {
+    public function deleteImage(Request $request)
+    {
 
-        $image_id = $request->image_id ;
+        $image_id = $request->image_id;
 
-        $image = ImageRoom::find($image_id) ;
+        $image = ImageRoom::find($image_id);
 
-        if(file_exists($image->image_room)) {
-            unlink($image->image_room) ;
+        if (file_exists($image->image_room)) {
+            unlink($image->image_room);
         }
 
-        $image->delete() ;
+        $image->delete();
 
-        return back() ;
+        return back();
     }
 }

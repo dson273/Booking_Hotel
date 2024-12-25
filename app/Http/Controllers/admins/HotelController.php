@@ -9,32 +9,32 @@ use Illuminate\Support\Facades\DB;
 
 class HotelController extends Controller
 {
-    
+
     public function index()
     {
-        $title = "Quản lí khách sạn" ;
+        $title = "Quản lí khách sạn";
 
-        $listHotels = Hotel::query()->latest('id')->paginate(10) ;
+        $listHotels = Hotel::query()->latest('id')->paginate(10);
 
-        return view('admins.hotels.manager_hotel' , compact('title' , 'listHotels')) ;
+        return view('admins.hotels.manager_hotel', compact('title', 'listHotels'));
     }
 
-    
+
     public function create()
     {
-        $title = "Thêm khách sạn" ;
-        
-        return view('admins.hotels.create_hotel' , compact('title')) ;
+        $title = "Thêm khách sạn";
+
+        return view('admins.hotels.create_hotel', compact('title'));
     }
 
-   
+
     public function store(Request $request)
     {
-        $data = $request->all() ;
+        $data = $request->all();
 
-        Hotel::query()->create($data) ;
+        Hotel::query()->create($data);
 
-        return redirect()->route('hotels.index') ;
+        return redirect()->route('hotels.index');
     }
 
     // Đã xử lí except ở route cho phương thức show ;
@@ -43,35 +43,35 @@ class HotelController extends Controller
         //
     }
 
-    
+
     public function edit(string $id)
     {
-        $title = "Cập nhật khách sạn" ;
+        $title = "Cập nhật khách sạn";
 
-        $hotelId = Hotel::find($id) ;
+        $hotelId = Hotel::find($id);
 
-        return view('admins.hotels.update_hotel' , compact('title' , 'hotelId')) ;
+        return view('admins.hotels.update_hotel', compact('title', 'hotelId'));
     }
 
-    
+
     public function update(Request $request, string $id)
     {
-        $hotel = Hotel::find($id) ;
+        $hotel = Hotel::find($id);
 
-        $data = $request->all() ;
+        $data = $request->all();
 
-        $hotel->update($data) ;
+        $hotel->update($data);
 
-        return redirect()->route('hotels.index')->with('success' , 'Cập nhật khách sạn thành công') ;
+        return redirect()->route('hotels.index')->with('success', 'Cập nhật khách sạn thành công');
     }
 
-    
+
     public function destroy(string $id)
     {
-        $hotel = Hotel::find($id) ;
+        $hotel = Hotel::find($id);
 
-        if(!$hotel->images()->exists() && !$hotel->rooms()->exists() && !$hotel->comments()->exists()) {
-            $hotel->delete() ;
+        if (!$hotel->images()->exists() && !$hotel->rooms()->exists() && !$hotel->comments()->exists()) {
+            $hotel->delete();
         }
 
         return redirect()->route('hotels.index')->with('success', 'Xóa khách sạn thành công');

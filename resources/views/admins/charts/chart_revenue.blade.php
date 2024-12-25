@@ -10,32 +10,32 @@
 
     <style>
         .chart-wrapper {
-            overflow-x: auto; 
-            width: 100%; 
+            overflow-x: auto;
+            width: 100%;
         }
 
         /* Thiết lập table */
         .chart {
-            width: 100%; 
-            white-space: nowrap; 
+            width: 100%;
+            white-space: nowrap;
         }
 
         .chart-wrapper::-webkit-scrollbar {
-            height: 7px; 
+            height: 7px;
         }
-        
+
         .chart-wrapper::-webkit-scrollbar-thumb {
-            background-color: #a1a1a1; 
-            border-radius: 6px; 
+            background-color: #a1a1a1;
+            border-radius: 6px;
         }
-        
+
         .chart-wrapper::-webkit-scrollbar-thumb:hover {
-            background-color: #808080; 
+            background-color: #808080;
         }
 
     </style>
 @endsection
-    
+
 @section('content')
     @include('admins.layouts.admin_sidebar')
     <div class="height-100">
@@ -56,7 +56,7 @@
                 </form>
                 <div class="col-8">
                     <form action="{{ route('post-chart-revenue') }}" method="post" id="revenue" class="px-2">
-                        
+
                     </form>
                 </div>
             </div>
@@ -64,7 +64,7 @@
 
             </div>
         </div>
-        <div class="mt-4 mx-4 d-flex justify-content-end">  
+        <div class="mt-4 mx-4 d-flex justify-content-end">
             <a href="{{ route('chart-bookings') }}" class="btn btn-primary">Thống kê đặt phòng</a>
         </div>
     </div>
@@ -77,14 +77,14 @@
     <script>
         new Morris.Bar({
             element: 'chart',
-            
+
             data: [
                 @foreach($resultRevenue as $keyRevenue => $valueRevenue)
                     { Name: '{{ $valueRevenue->name_hotel }}', value: {{ $valueRevenue->total_revenue }} },
                 @endforeach
             ],
 
-            xkey: 'Name',  
+            xkey: 'Name',
             ykeys: ['value'],
             labels: ['Tổng thu']
         });
@@ -118,7 +118,7 @@
                 monthSelectHTML += '</select>';
 
                 let yearSelectHTML = '<select class="form-select" name="year" id="year">';
-                for (let i = 1970; i <= currentYear; i++) {
+                for (let i = 2020; i <= currentYear; i++) {
                     yearSelectHTML += `<option value="${i}">Năm ${i}</option>`;
                 }
                 yearSelectHTML += '</select>';
@@ -141,7 +141,7 @@
                 const currentYear = currentDate.getFullYear();
 
                 let yearSelectHTML = '<select class="form-select" name="year" id="year">';
-                for (let i = 1970; i <= currentYear; i++) {
+                for (let i = 2020; i <= currentYear; i++) {
                     yearSelectHTML += `<option value="${i}">Năm ${i}</option>`;
                 }
                 yearSelectHTML += '</select>';

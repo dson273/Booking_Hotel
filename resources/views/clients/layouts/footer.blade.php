@@ -53,7 +53,7 @@
                     <ul class="nav-footer">
                         <li><a href="#"><i class="fa-solid fa-chevron-right"></i>Tầng 10, số 60 Nguyễn Đình Chiểu, Phường Đa Kao, Quận 1, Tp Hồ Chí Minh.</a></li>
                         <li><a href="#"><i class="fa-solid fa-chevron-right"></i>1900 54 54 40 (1000đ/phút)</a></li>
-                        <li><a href="#"><i class="fa-solid fa-chevron-right"></i>vuxuanduc33@gmail.com</a></li>
+                        <li><a href="#"><i class="fa-solid fa-chevron-right"></i>dacson273@gmail.com</a></li>
                         <li><a href="#"><i class="fa-solid fa-chevron-right"></i>2008 Công Ty Cổ Phần Dịch Vụ Du Lịch Hai Bốn.</a></li>
                         <li><a href="#"><i class="fa-solid fa-chevron-right"></i>ĐT: 028 73030 588 - 028 3925 1055</a></li>
                     </ul>
@@ -61,13 +61,13 @@
             </div>
         </footer>
     </div>
-    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    {{-- <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
     <df-messenger
     intent="WELCOME"
     chat-title="BookingRoom"
     agent-id="29a60061-2c22-4925-b8e8-44f01874df15"
     language-code="vi"
-    ></df-messenger>
+    ></df-messenger> --}}
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>

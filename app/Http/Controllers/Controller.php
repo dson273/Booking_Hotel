@@ -52,7 +52,6 @@ class Controller extends BaseController
             $minutes += $interval->i; // Thêm số phút
 
             // Kiểm tra nếu đơn đặt phòng được xác nhận sau 30 phút khách hàng chưa thanh toán thì sẽ chuyển sang trạng thái hủy phòng ;
-
             if ($minutes > 30) {
 
                 $updateReservation['status_id'] = 4;
@@ -132,7 +131,6 @@ class Controller extends BaseController
         $numberPeople = $request->number_people;
 
         // Khởi tạo mảng số lượt đánh giá ;
-
         $countRatings = [];
 
         if (!$nameHotel || !$check_in_date || !$check_out_date || !$numberPeople) {
